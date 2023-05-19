@@ -6,11 +6,29 @@ import time
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+
+app = FastAPI()
+
 named_tuple = time.localtime() # get struct_time
 time_string = time.strftime("%m/%d/%Y, %H:%M:%S", named_tuple)
 
 BNKRBankIP = '127.0.0.1'
 BNKRGuiIP = '127.0.0.1'
+
+
+
+
+class AccountRequest(BaseModel):
+       Bank:str
+       Iban:str
+       pin:str
+
+
+
+@app.post('/testendpoint')
+async def testpoint(request:AccountRequest):
+       return request
+
 
 accountInfo = {'Bank': 'value',
               'Iban': 'value',
@@ -25,9 +43,6 @@ bankInfo = {'Bank': 'value',
             'Status': 'value',
             'Time': time_string,
             'Auth': 'value'}
-
-
-app = FastAPI()
 
 # welcome page
 
