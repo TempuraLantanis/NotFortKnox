@@ -26,15 +26,20 @@ bankInfo = {'Bank': 'value',
             'Time': time_string,
             'Auth': 'value'}
 
-App = FastAPI()
+
+app = FastAPI()
 
 # welcome page
-@App.post("/welcome")
+
+
+app.post("/welcome")
 async def welcome():
         return {"Welcome to BNKR ATM Services"}
 
 # Login & Authentication
-@App.post("/login")
+
+
+app.post("/login")
 async def login ():
     # Account number
     # Iban info from the front-end
@@ -64,7 +69,9 @@ async def login ():
             r = requests.post(BNKRGuiIP, auth)
 
 # Account conformation.
-@App.post("/account")
+
+
+app.post("/account")
 async def account():
     # get all the bank information from the bank database for the user
     bankInfo = requests.post(BNKRBankIP, params = bankInfo)
